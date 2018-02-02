@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: salt-master-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: salt-master
+    spec:
+      containers:
+      - name: k8s-salt
+        image: 601953533983.dkr.ecr.us-east-1.amazonaws.com/salt:latest
+        volumeMounts:
+          - name: pki-pvc
+            mountPath: "/etc/salt/pki"
+          - name: cache-pvc
+            mountPath: "/var/cache/salt"  
+      restartPolicy: "Always"
+      volumes:
+        - name: pki-pvc
+          persistentVolumeClaim:
+            claimName: pki-pvc
+        - name: cache-pvc
+          persistentVolumeClaim:
+            claimName: cache-pvc

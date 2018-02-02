@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: salt-service
+spec:
+  ports:
+  - name: publisher
+    protocol: TCP
+    port: 4505
+    targetPort: 4505
+  - name: requestserver
+    protocol: TCP
+    port: 4506
+    targetPort: 4506
+  selector:
+    app: salt-master
+  type: LoadBalancer

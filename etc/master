@@ -1,0 +1,31 @@
+interface: 0.0.0.0
+auto_accept: True
+
+
+fileserver_backend:
+  - git
+  - roots
+  
+gitfs_provider: pygit2
+
+gitfs_remotes:
+  - git@github.com:danbryan/salt-k8.git:
+    - root: salt
+    - base: master
+    - privkey: /root/key
+    - pubkey: /root/key.pub
+
+winrepo_remotes_ng:
+  - git@github.com:danbryan/salt-k8.git:
+    - root: salt
+    - base: master
+    - privkey: /root/key
+    - pubkey: /root/key.pub
+
+ext_pillar:
+  - git:
+    - master git@github.com:danbryan/salt-k8.git:
+      - root: pillar
+      - privkey: /root/key
+      - pubkey: /root/key.pub
+

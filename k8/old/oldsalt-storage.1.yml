@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: salt-pki-pv
+  namespace: default
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: fs-86c7ddcf.efs.us-east-1.amazonaws.com
+    path: /salt-pki
+    
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: salt-log-pv
+  namespace: default
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: fs-86c7ddcf.efs.us-east-1.amazonaws.com
+    path: /salt-log
+    
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: salt-pki-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: ""
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 8Gi
+
+---  
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: salt-log-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: ""
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 8Gi
