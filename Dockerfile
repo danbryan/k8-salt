@@ -1,6 +1,6 @@
 
 FROM        ubuntu:16.04
-ENV         REFRESHED_AT 2018-02-01
+ENV         REFRESHED_AT 2018-02-05
 
 # Update system
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq && \
@@ -60,5 +60,8 @@ VOLUME ["/etc/salt/pki", "/var/log/salt"]
 
 WORKDIR /srv/salt
 EXPOSE 4505 4506
+
+RUN update-rc.d salt-master defaults
+
 COPY start.sh /start.sh
 CMD ["bash", "/start.sh"]

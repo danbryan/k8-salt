@@ -1,0 +1,3 @@
+filesystemid: 'fs-86c7ddcf'
+awsregion: 'us-east-1'
+image: '601953533983.dkr.ecr.us-east-1.amazonaws.com/salt:latest'

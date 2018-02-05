@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: k8s-salt
-        image: 601953533983.dkr.ecr.us-east-1.amazonaws.com/salt:latest
+        image: {{ .Values.image }}
         volumeMounts:
           - name: pki-pvc
             mountPath: "/etc/salt/pki"

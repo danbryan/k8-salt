@@ -4,8 +4,8 @@ kind: ConfigMap
 metadata:
   name: efs-provisioner
 data:
-  file.system.id: fs-86c7ddcf
-  aws.region: us-east-1
+  file.system.id: {{ .Values.filesystemid }} #EG: fs-86c7ddcf
+  aws.region: {{ .Values.awsregion }} # EG: us-east-1
   provisioner.name: example.com/aws-efs
 ---
 kind: Deployment
@@ -46,9 +46,10 @@ spec:
       volumes:
         - name: pv-volume
           nfs:
-            server: fs-86c7ddcf.efs.us-east-1.amazonaws.com
+            server: {{ .Values.filesystemid }}.efs.{{ .Values.awsregion }}.amazonaws.com #CHANGE ME
             path: /
 ---
+
 kind: StorageClass
 apiVersion: storage.k8s.io/v1beta1
 metadata:
